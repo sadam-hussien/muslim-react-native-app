@@ -1,0 +1,25 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Cairo-Bold.ttf",
+      "sha1": "b365ba7df32303352181eb0e15b8644de4c72cc7"
+    },
+    {
+      "path": "src/assets/fonts/Cairo-Medium.ttf",
+      "sha1": "e511fd013d19131c5bd1b81f34374c3195add0e3"
+    },
+    {
+      "path": "src/assets/fonts/Cairo-Regular.ttf",
+      "sha1": "7870d2686f3bf0dbcf38e959eaa82bd4a9514970"
+    },
+    {
+      "path": "src/assets/fonts/Quran-bold.ttf",
+      "sha1": "cb99d05f18e8b6c97c1f53e2ce12da55bb32f53d"
+    },
+    {
+      "path": "src/assets/fonts/Quran-regular.ttf",
+      "sha1": "93960239972f2387da18f21995fb29dc42afd386"
+    }
+  ]
+}
