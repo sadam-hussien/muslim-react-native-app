@@ -1,4 +1,4 @@
-package com.muslimapp.newarchitecture;
+package com.hus.muslim.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.muslimapp.BuildConfig;
-import com.muslimapp.newarchitecture.components.MainComponentsRegistry;
-import com.muslimapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.hus.muslim.BuildConfig;
+import com.hus.muslim.newarchitecture.components.MainComponentsRegistry;
+import com.hus.muslim.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

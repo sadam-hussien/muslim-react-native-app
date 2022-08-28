@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.muslimapp",
+    package = "com.hus.muslim",
 )
 
 android_resource(
     name = "res",
-    package = "com.muslimapp",
+    package = "com.hus.muslim",
     res = "src/main/res",
 )
 
