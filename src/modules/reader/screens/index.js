@@ -11,7 +11,7 @@ import {
 
 import {store} from '@/store';
 
-import {action_set_media} from '@/store/actions';
+import {action_set_media, action_remove_media} from '@/store/actions';
 
 import {Back} from '@/components';
 
@@ -52,6 +52,11 @@ const Reader = ({route}) => {
       }
     }
   };
+
+  // empty media
+  useEffect(() => {
+    dispatchMedia(action_remove_media());
+  }, []);
 
   useEffect(() => {
     getReader(id)

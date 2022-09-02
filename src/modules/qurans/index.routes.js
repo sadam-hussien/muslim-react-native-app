@@ -12,6 +12,10 @@ const routes = [
   {
     name: 'Qurans',
     component: Qurans,
+
+    iconType: 'FontAwesome5',
+    iconName: 'book-reader',
+    label: 'القرءان',
     options: {
       tabBarLabel: 'القرءان',
       tabBarIcon: ({focused, color}) => {

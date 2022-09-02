@@ -12,6 +12,9 @@ const routes = [
   {
     name: 'OtherReaders',
     component: OtherReaders,
+    iconType: 'FontAwesome5',
+    iconName: 'user',
+    label: 'قراء اخرين',
     options: {
       tabBarLabel: 'قراء اخرين',
       tabBarIcon: ({focused, color}) => {

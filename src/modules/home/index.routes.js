@@ -12,6 +12,9 @@ const routes = [
   {
     name: 'Home',
     component: Home,
+    iconType: 'FontAwesome5',
+    iconName: 'quran',
+    label: 'الرئيسية',
     options: {
       tabBarLabel: 'الرئيسية',
       tabBarIcon: ({focused, color}) => {

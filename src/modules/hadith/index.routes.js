@@ -12,6 +12,10 @@ const routes = [
   {
     name: 'Hadith',
     component: Hadith,
+
+    iconType: 'FontAwesome5',
+    iconName: 'moon',
+    label: 'الحديث',
     options: {
       tabBarLabel: 'الحديث',
       tabBarIcon: ({focused, color}) => {

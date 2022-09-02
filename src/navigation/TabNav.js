@@ -6,11 +6,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Header from '@/layout/header';
 
+import TabButton from './TabButton';
+
 import homeRoutes from '@/modules/home/index.routes';
+import quranRoutes from '@/modules/qurans/index.routes';
 import hadithRoutes from '@/modules/hadith/index.routes';
-import radioRoutes from '@/modules/radio/index.routes';
 import otherReadersRoutes from '@/modules/otherReaders/index.routes';
-import favRoutes from '@/modules/fav/index.routes';
+import radioRoutes from '@/modules/radio/index.routes';
 
 import {fonts, colors, sizes} from '@/constants';
 
@@ -18,10 +20,10 @@ const Tab = createBottomTabNavigator();
 
 const tabs = [
   ...homeRoutes,
+  ...quranRoutes,
   ...hadithRoutes,
-  ...radioRoutes,
   ...otherReadersRoutes,
-  ...favRoutes,
+  ...radioRoutes,
 ];
 
 export default function TabNav() {
@@ -34,14 +36,14 @@ export default function TabNav() {
           return <Header title={title} />;
         },
         tabBarStyle: {
+          backgroundColor: colors.dark,
+          borderRadius: 32,
+          height: 65,
           position: 'absolute',
-          left: sizes.padding,
-          right: sizes.padding,
-          bottom: sizes.padding,
-          backgroundColor: colors.secondary,
-          borderRadius: 20,
-          height: 70,
-          flex: 1,
+          bottom: 10,
+          left: 10,
+          right: 10,
+          paddingHorizontal: sizes.margin,
         },
         tabBarShowLabel: false,
       })}>
@@ -50,7 +52,10 @@ export default function TabNav() {
           name={item.name}
           component={item.component}
           key={index}
-          options={item.options}
+          options={{
+            ...item.options,
+            tabBarButton: props => <TabButton {...props} item={item} />,
+          }}
         />
       ))}
     </Tab.Navigator>

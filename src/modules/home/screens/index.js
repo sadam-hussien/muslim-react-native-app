@@ -61,7 +61,7 @@ const Home = () => {
       <ScrollView style={{flex: 1}}>
         <View style={styles.headerContentContainerInner}>
           <Intro />
-          <Stats />
+          {/* <Stats /> */}
         </View>
         <View style={styles.readersContainer}>
           <Filter handleSearch={handleSearch} />

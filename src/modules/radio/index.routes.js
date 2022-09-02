@@ -12,6 +12,10 @@ const routes = [
   {
     name: 'Radio',
     component: Radio,
+
+    iconType: 'MaterialIcons',
+    iconName: 'radio',
+    label: 'الاذاعة',
     options: {
       tabBarLabel: 'الاذاعة',
       tabBarIcon: ({focused, color}) => {

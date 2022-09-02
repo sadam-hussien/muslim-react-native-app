@@ -7,7 +7,15 @@ export const api_readers = 'https://qurani-api.herokuapp.com/api/reciters';
 
 export const api_quranText = 'https://quran-endpoint.vercel.app/quran';
 
-export const api_hadith = 'https://api.hadith.sutanlab.id/books';
+// export const api_hadith = 'https://api.hadith.sutanlab.id/books';
+
+export const api_hadith_books =
+  'https://ahadith-api.herokuapp.com/api/books/ar';
+
+export const api_hadith_chapters =
+  'https://ahadith-api.herokuapp.com/api/chapter'; // bookid / language
+
+export const api_hadith_list = 'https://ahadith-api.herokuapp.com/api/ahadith'; // bookid / chapterid / language
 
 export const sizes = {
   // global sizes
@@ -64,4 +72,6 @@ export const images = {
   muslim: require('@/assets/images/muslim.png'),
   quran: require('@/assets/images/quran.png'),
   man: require('@/assets/images/man.png'),
+  islamic: require('@/assets/images/islamic.png'),
+  prayer: require('@/assets/images/prayer.png'),
 };

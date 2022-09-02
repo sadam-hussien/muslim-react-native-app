@@ -8,9 +8,16 @@ import readerRoutes from '@/modules/reader/index.routes';
 
 import quranRoutes from '@/modules/quran/index.routes';
 
+import hadithListRoutes from '@/modules/hadithList/index.routes';
+
 const Stack = createNativeStackNavigator();
 
-const routes = [...tabNavRoutes, ...readerRoutes, ...quranRoutes];
+const routes = [
+  ...tabNavRoutes,
+  ...readerRoutes,
+  ...quranRoutes,
+  ...hadithListRoutes,
+];
 
 export default function HomeStack() {
   return (

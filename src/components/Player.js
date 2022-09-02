@@ -11,19 +11,26 @@ import TrackPlayer, {
   State,
   Event,
   useTrackPlayerEvents,
+  Capability,
 } from 'react-native-track-player';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {sizes, colors} from '@/constants';
 
-const setupPlayer = async data => {
+const setupPlayer = async () => {
   await TrackPlayer.setupPlayer();
-  await TrackPlayer.add(data);
 };
 
-const reloadPlayer = async data => {
-  await TrackPlayer.pause();
+const handlePlayer = async data => {
+  const traks = await TrackPlayer.getQueue();
+  if (traks.length) {
+    await TrackPlayer.stop();
+    await TrackPlayer.add(data, 0);
+    await TrackPlayer.skip(0);
+  }
+  await TrackPlayer.add(data);
+  await TrackPlayer.play();
 };
 
 const togglePlayer = async isPlaying => {
@@ -38,7 +45,7 @@ const togglePlayer = async isPlaying => {
   }
 };
 
-const events = [Event.PlaybackTrackChanged];
+const events = [Event.PlaybackTrackChanged, Event.PlaybackError];
 
 const Player = () => {
   const {media, dispatchMedia} = useContext(store);
@@ -48,14 +55,12 @@ const Player = () => {
   const isPlaying = playerState === State.Playing;
 
   useEffect(() => {
+    setupPlayer();
+  }, []);
+
+  useEffect(() => {
     if (suras) {
-      if (isPlaying) {
-        reloadPlayer(suras);
-      } else {
-        setupPlayer(suras).then(res => {
-          dispatchMedia(action_set_active_media({index: 0, data: suras[0]}));
-        });
-      }
+      handlePlayer(suras);
     }
   }, [suras]);
 
@@ -65,12 +70,16 @@ const Player = () => {
   const nextItem = async () => {
     await TrackPlayer.skipToNext();
   };
+
   const playThis = async trakIndex => {
     let currentPlayerIndex = await TrackPlayer.getCurrentTrack();
-    if (trakIndex === 0 || currentPlayerIndex !== trakIndex) {
-      await TrackPlayer.skip(trakIndex);
-      if (!isPlaying) {
-        await TrackPlayer.play();
+    const tracks = await TrackPlayer.getQueue();
+    if (tracks.length) {
+      if (trakIndex === 0 || currentPlayerIndex !== trakIndex) {
+        await TrackPlayer.skip(trakIndex);
+        if (!isPlaying) {
+          await TrackPlayer.play();
+        }
       }
     }
   };
@@ -80,15 +89,21 @@ const Player = () => {
     }
   }, [activeMedia.index]);
 
-  useTrackPlayerEvents(events, event => {
-    if (event.type === Event.PlaybackTrackChanged) {
-      if (activeMedia.index !== event.nextTrack) {
-        dispatchMedia(
-          action_set_active_media({
-            index: event.nextTrack,
-            data: suras[event.nextTrack],
-          }),
-        );
+  useTrackPlayerEvents(events, async event => {
+    const tracks = await TrackPlayer.getQueue();
+    if (tracks.length) {
+      if (event.type === Event.PlaybackTrackChanged) {
+        if (activeMedia.index !== event.nextTrack) {
+          dispatchMedia(
+            action_set_active_media({
+              index: event.nextTrack,
+              data: suras[event.nextTrack],
+            }),
+          );
+        }
+      }
+      if (event.type === Event.PlaybackError) {
+        console.log(event);
       }
     }
   });
@@ -135,6 +150,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.light,
   },
   btn: {
     width: 50,
