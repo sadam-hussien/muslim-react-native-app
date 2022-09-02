@@ -6,19 +6,20 @@ import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 
 import {colors, sizes, fonts} from '@/constants';
 
-const ChapterItem = ({data, bookData}) => {
+const ChapterItem = ({data, bookData, closeModal}) => {
   const {navigate} = useNavigation();
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() =>
+      onPress={() => {
+        closeModal();
         navigate('HadithList', {
           bookId: bookData.id,
           bookName: bookData.name,
           chapterId: data.Chapter_ID,
           chapterName: data.Chapter_Name,
-        })
-      }>
+        });
+      }}>
       <Text style={styles.chapterText}>{data.Chapter_Name}</Text>
     </TouchableOpacity>
   );

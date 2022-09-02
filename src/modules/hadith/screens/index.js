@@ -107,7 +107,7 @@ const Hadith = () => {
                 </View>
               )}
               renderItem={({item}) => (
-                <ChapterItem data={item} bookData={bookSelected} />
+                <ChapterItem data={item} bookData={bookSelected} closeModal={closeModal} />
               )}
               contentContainerStyle={{
                 paddingHorizontal: sizes.padding,
