@@ -8,7 +8,7 @@ import {sizes, fonts, colors} from '@/constants';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const Back = () => {
+const Back = ({children}) => {
   const {goBack} = useNavigation();
 
   return (
@@ -22,6 +22,7 @@ const Back = () => {
         />
         <Text style={styles.text}>عودة</Text>
       </TouchableOpacity>
+      <View>{children}</View>
     </View>
   );
 };
@@ -31,6 +32,8 @@ const styles = StyleSheet.create({
     padding: sizes.padding,
     backgroundColor: colors.light,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   btn: {
     flexDirection: 'row',

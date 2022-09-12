@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/Al_Majeed_Quranic.ttf",
+      "sha1": "ab53a8b4bd3735be3b9625fed87bc8c0aee9a031"
+    },
+    {
       "path": "src/assets/fonts/Cairo-Bold.ttf",
       "sha1": "b365ba7df32303352181eb0e15b8644de4c72cc7"
     },
@@ -20,6 +24,14 @@
     {
       "path": "src/assets/fonts/Quran-regular.ttf",
       "sha1": "93960239972f2387da18f21995fb29dc42afd386"
+    },
+    {
+      "path": "src/assets/fonts/ScheherazadeNew-Bold.ttf",
+      "sha1": "2bc96ae40c167ce42f54aa8c55e6c6a34a674cce"
+    },
+    {
+      "path": "src/assets/fonts/ScheherazadeNew-Regular.ttf",
+      "sha1": "9eacf8856d160070c2a7bf4880942b5c53f4aff8"
     }
   ]
 }

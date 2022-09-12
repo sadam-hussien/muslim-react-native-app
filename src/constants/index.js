@@ -55,6 +55,13 @@ export const fonts = {
   body3: {fontFamily: 'Cairo-Regular', fontSize: sizes.body3},
   body4: {fontFamily: 'Cairo-Regular', fontSize: sizes.body4},
   body5: {fontFamily: 'Cairo-Regular', fontSize: sizes.body5},
+  islamicFont: {fontFamily: 'Al_Majeed_Quranic'},
+  islamicFont2: {
+    fontFamily: 'ScheherazadeNew-Regular',
+  },
+  islamicFont2Bold: {
+    fontFamily: 'ScheherazadeNew-Bold',
+  },
 };
 
 export const colors = {

@@ -123,10 +123,10 @@ const styles = StyleSheet.create({
     marginTop: sizes.padding,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
-    // padding: sizes.padding,
     paddingHorizontal: sizes.padding,
     paddingTop: sizes.padding,
     paddingBottom: sizes.padding * 2 + 80,
+    flex: 1,
   },
   readersItems: {
     marginTop: sizes.padding * 2,

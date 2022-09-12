@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 
 import {
   View,
@@ -7,6 +7,7 @@ import {
   FlatList,
   ActivityIndicator,
   Image,
+  ScrollView,
 } from 'react-native';
 
 import {Back} from '@/components';
@@ -17,10 +18,21 @@ import {getQuran} from '../server';
 
 import LinearGradient from 'react-native-linear-gradient';
 
+import SelectDropdown from 'react-native-select-dropdown';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+const fontsData = [
+  {name: 'الخط رقم 1', value: fonts.islamicFont},
+  {name: 'الخط رقم 2', value: fonts.islamicFont2},
+  {name: 'الخط رقم 3', value: fonts.islamicFont2Bold},
+];
+
 const Quran = ({route}) => {
   const {id} = route.params;
   const [ayahs, setAyahs] = useState(null);
   const [data, setData] = useState(null);
+  const [selectedFont, setSelectedFont] = useState(null);
 
   useEffect(() => {
     getQuran(id).then(res => {
@@ -31,13 +43,8 @@ const Quran = ({route}) => {
   return (
     <View style={styles.container}>
       <Back />
-      <FlatList
-        data={ayahs}
-        keyExtractor={item => item.number.inquran}
-        ListEmptyComponent={() => (
-          <ActivityIndicator size="large" color={colors.dark} />
-        )}
-        ListHeaderComponent={
+      <ScrollView>
+        <View style={styles.contentContainer}>
           <View style={styles.header}>
             <LinearGradient
               colors={[colors.primary, colors.secondary]}
@@ -57,16 +64,106 @@ const Quran = ({route}) => {
               )}
             </LinearGradient>
           </View>
-        }
-        renderItem={({item}) => (
-          <View style={{alignItems: 'center'}}>
+          <View style={styles.fontSelect}>
+            <SelectDropdown
+              data={fontsData}
+              defaultButtonText="تغيير خط القراءة"
+              buttonStyle={{
+                backgroundColor: colors.light,
+                flex: 1,
+                justifyContent: 'space-between',
+                width: '100%',
+                paddingVertical: 5,
+                paddingHorizontal: 15,
+                height: 60,
+                borderRadius: 60,
+              }}
+              buttonTextStyle={{
+                color: colors.dark,
+                ...fonts.body2,
+                textAlign: 'left',
+              }}
+              renderDropdownIcon={() => (
+                <Ionicons
+                  name="chevron-down-outline"
+                  size={28}
+                  color={colors.subDark}
+                  style={{flex: 1}}
+                />
+              )}
+              dropdownIconPosition="right"
+              dropdownStyle={{
+                borderRadius: 10,
+                backgroundColor: colors.light,
+                marginTop: sizes.padding,
+              }}
+              rowStyle={{
+                paddingVertical: sizes.radius,
+                paddingHorizontal: sizes.radius,
+                borderBottomColor: `rgba(0, 0, 0, .1)`,
+                flex: 1,
+                height: 60,
+                width: '100%',
+              }}
+              rowTextStyle={{
+                ...fonts.body2,
+                color: colors.dark,
+                textAlign: 'auto',
+              }}
+              selectedRowStyle={{
+                backgroundColor: colors.primary,
+              }}
+              selectedRowTextStyle={{
+                color: colors.light,
+              }}
+              onSelect={(selectedItem, index) => {
+                console.log(selectedItem.value);
+                setSelectedFont(selectedItem.value);
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+                return selectedItem.name;
+              }}
+              rowTextForSelection={(item, index) => {
+                return item.name;
+              }}
+            />
+          </View>
+          <View style={styles.ayahsContainer}>
+            {data ? (
+              <Text
+                style={[styles.bismillah, selectedFont ? selectedFont : {}]}>
+                {data.preBismillah?.text?.ar}
+              </Text>
+            ) : (
+              <></>
+            )}
             <View style={styles.item}>
-              <Text style={styles.itemText}>{item.text.ar}</Text>
+              {ayahs ? (
+                <Text
+                  style={[styles.ayahText, selectedFont ? selectedFont : {}]}>
+                  {ayahs.map((item, index) => (
+                    <Fragment key={index}>
+                      {item.text.ar}
+                      <Text style={styles.ayahNumber}>
+                        {' '}
+                        ﴿{item.number.insurah}﴾{' '}
+                      </Text>
+                    </Fragment>
+                  ))}
+                </Text>
+              ) : (
+                <View
+                  style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <ActivityIndicator size="large" color={colors.dark} />
+                </View>
+              )}
             </View>
           </View>
-        )}
-        contentContainerStyle={styles.contentContainer}
-      />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -111,20 +208,28 @@ const styles = StyleSheet.create({
   loader: {
     alignItems: 'flex-start',
   },
-  item: {
-    backgroundColor: `rgba(${colors.primary_rgba}, .1)`,
-    // borderWidth: 0.3,
-    // borderColor: colors.primary,
-    padding: sizes.padding,
-    borderRadius: 5,
+  fontSelect: {
     marginBottom: sizes.margin,
-    width: 100 - 4 + '%',
-    // marginHorizontal: 'auto',
   },
-  itemText: {
-    ...fonts.h2,
-    fontSize: 18,
+  ayahsContainer: {
+    padding: sizes.margin,
+    backgroundColor: `rgba(${colors.primary_rgba}, .1)`,
+    borderRadius: 10,
+  },
+  bismillah: {
+    ...fonts.islamicFont2Bold,
+    fontSize: 23,
     color: colors.dark,
+    textAlign: 'center',
+  },
+  ayahText: {
+    ...fonts.islamicFont2Bold,
+    fontSize: 23,
+    color: colors.dark,
+    textAlign: 'justify',
+  },
+  ayahNumber: {
+    color: colors.primary,
   },
 });
 
