@@ -1,4 +1,4 @@
-package com.hus.muslim;
+package com.hus.islamics;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

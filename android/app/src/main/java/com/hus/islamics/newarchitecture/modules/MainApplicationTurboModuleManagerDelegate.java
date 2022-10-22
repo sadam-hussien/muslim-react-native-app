@@ -1,4 +1,4 @@
-package com.hus.muslim.newarchitecture.modules;
+package com.hus.islamics.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
